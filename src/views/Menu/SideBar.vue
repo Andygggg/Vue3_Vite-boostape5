@@ -31,7 +31,38 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const MenuRouter = computed(() => {
+  var Menu = router.currentRoute.value
+  if (Menu.matched[0].children) {
+    const All = Menu.matched[0].children.filter((choose) => choose.meta.isOnHeader === true)
+    const FilterMenu = []
+    All.forEach((menu) => {
+      let items = {
+        HeadTitle: menu.meta.title,
+        Children: menu.children.filter((choose) => choose.meta.isOnSidebar === true),
+      }
+      FilterMenu.push(items)
+    })
+    return FilterMenu
+  } else {
+    return []
+  }
+})
+
+const ChooseChild = computed(() => {
+  var Now = router.currentRoute.value
+  return Now
+})
+
+console.log(MenuRouter.value)
+console.log(ChooseChild.value)
+</script>
 
 <style scoped>
 .sidebar {

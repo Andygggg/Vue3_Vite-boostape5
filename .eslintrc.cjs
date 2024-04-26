@@ -19,12 +19,7 @@ module.exports = {
         functions: 'only-multiline',
       },
     ],
-    'vue/multi-word-component-names': [
-      'error',
-      {
-        ignores: ['index', '404'],
-      },
-    ],
+    'vue/multi-word-component-names': 'off',
   },
   parserOptions: {
     ecmaVersion: 'latest',
