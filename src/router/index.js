@@ -49,6 +49,7 @@ const router = createRouter({
           ],
         },
       ],
+      redirect: { name: 'Table' },
     },
   ],
 })
