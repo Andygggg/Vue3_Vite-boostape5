@@ -11,15 +11,20 @@
 
     <div class="sidebar_menu">
       <ul>
-        <!-- <li v-for="(item, index) in ChildRouter" :key="index">
-          <div
-            :class="{ active: ChooseChild.matched[2].name === item.name }"
-            @click="PushTo(item.name)"
-          >
-            <i :class="item.meta.icon"></i>
-            <span>{{ item.meta.title }}</span>
+        <li v-for="(item, index) in MenuRouter" :key="index">
+          <div :class="{ active: ChooseChild.matched[1].name === item.Head.name }">
+            <i :class="item.Head.meta.icon"></i>
+            <span>{{ item.Head.meta.title }}</span>
           </div>
-        </li> -->
+          <div
+            class="child_menu"
+            v-for="(child, i) in item.Children"
+            :key="i"
+            @click="PushTo(child.name)"
+          >
+            {{ child.meta.title }}
+          </div>
+        </li>
         <li>
           <div class="footer">
             <i class="bx bx-log-out"></i>
@@ -44,7 +49,7 @@ const MenuRouter = computed(() => {
     const FilterMenu = []
     All.forEach((menu) => {
       let items = {
-        HeadTitle: menu.meta.title,
+        Head: menu,
         Children: menu.children.filter((choose) => choose.meta.isOnSidebar === true),
       }
       FilterMenu.push(items)
@@ -62,6 +67,10 @@ const ChooseChild = computed(() => {
 
 console.log(MenuRouter.value)
 console.log(ChooseChild.value)
+
+const PushTo = (path) => {
+  router.push({ name: path })
+}
 </script>
 
 <style scoped>
@@ -120,7 +129,10 @@ console.log(ChooseChild.value)
   bottom: 0;
   padding-bottom: 2rem;
 }
-.footer span {
+.sidebar_menu li div span {
+  display: none;
+}
+.sidebar_menu li .child_menu {
   display: none;
 }
 .sidebar_menu a span:first-child {
@@ -130,11 +142,23 @@ console.log(ChooseChild.value)
 #nav-toggle:checked + .sidebar {
   width: 240px;
 }
-#nav-toggle:checked + .sidebar .sidebar_menu li .footer span {
+#nav-toggle:checked + .sidebar .sidebar_menu li div span {
   display: block;
   font-weight: 600;
-  animation: show 2s;
+  animation: show 1s;
   white-space: nowrap;
+}
+#nav-toggle:checked + .sidebar .sidebar_menu li:hover .child_menu {
+  color: #ffffff;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: center;
+  cursor: pointer;
+  padding-top: 1rem;
+  font-weight: 600;
+  animation: show 1.5s;
 }
 @keyframes show {
   from {
