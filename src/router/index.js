@@ -13,6 +13,7 @@ const router = createRouter({
           name: 'Form',
           meta: {
             title: '表單',
+            icon: 'bx bxs-file-html',
             isOnHeader: true,
           },
           children: [
@@ -22,7 +23,6 @@ const router = createRouter({
               component: () => import('../content/Project/Form/Table.vue'),
               meta: {
                 title: '表格',
-                icon: 'bx bxs-file-html',
                 isOnSidebar: true,
               },
             },
@@ -33,6 +33,7 @@ const router = createRouter({
           name: 'Layout',
           meta: {
             title: '排版',
+            icon: 'bx bxs-file-html',
             isOnHeader: true,
           },
           children: [
@@ -42,7 +43,6 @@ const router = createRouter({
               component: () => import('../content/Project/Layout/Column.vue'),
               meta: {
                 title: '欄',
-                icon: 'bx bxs-file-html',
                 isOnSidebar: true,
               },
             },
