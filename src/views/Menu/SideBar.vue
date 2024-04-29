@@ -133,7 +133,21 @@ const PushTo = (path) => {
   display: none;
 }
 .sidebar_menu li .child_menu {
-  display: none;
+  /* display: none; */
+  /* position: relative;
+  right: 100px; */
+  color: #ffffff;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: 600;
+  visibility: hidden;
+  opacity: 0;
+  height: 0px;
+  transition: height 50ms ease-in-out;
 }
 .sidebar_menu a span:first-child {
   font-size: 1.5rem;
@@ -149,16 +163,11 @@ const PushTo = (path) => {
   white-space: nowrap;
 }
 #nav-toggle:checked + .sidebar .sidebar_menu li:hover .child_menu {
-  color: #ffffff;
-  font-size: 1.1rem;
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-  justify-content: center;
-  cursor: pointer;
+  height: 100%;
+  opacity: 1;
+  visibility: visible;
   padding-top: 1rem;
-  font-weight: 600;
-  animation: show 1.5s;
+  animation: showY 1s;
 }
 @keyframes show {
   from {
@@ -168,6 +177,16 @@ const PushTo = (path) => {
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+@keyframes showY {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 </style>

@@ -26,7 +26,7 @@ import NavBer from '../../views/Menu/NavBar.vue'
   z-index: 100;
 }
 .menu_right {
-  width: auto;
+  width: calc(100% - 70px);
   flex-grow: 1;
 }
 </style>
