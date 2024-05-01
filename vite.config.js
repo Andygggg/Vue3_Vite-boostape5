@@ -11,7 +11,7 @@ export default defineConfig({
   server: {
     open: true,
     https: false,
-    host: '192.168.68.114',
+    host: '192.168.68.103',
     port: 8079,
     proxy: null,
     cors: true,
@@ -19,7 +19,7 @@ export default defineConfig({
   preview: {
     open: true,
     https: false,
-    host: '192.168.68.114',
+    host: '192.168.68.103',
     port: 8082,
     proxy: null,
     cors: true,

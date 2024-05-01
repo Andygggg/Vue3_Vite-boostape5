@@ -5,7 +5,7 @@
         <span>{{ data.index }}</span>
       </template>
       <template #cell(two)="data">
-        <span style="color: blue">{{ data.item.two }}</span>
+        <span style="color: rgb(255, 0, 242)">{{ data.item.two }}</span>
       </template>
     </MakeTable>
   </div>
