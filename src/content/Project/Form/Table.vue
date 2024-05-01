@@ -29,6 +29,6 @@ const table_data = reactive([
 
 <style scoped>
 .table_container {
-  padding: 0 1rem 0 1rem;
+  padding: 1rem 1rem 0 1rem;
 }
 </style>

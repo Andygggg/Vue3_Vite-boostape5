@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table class="table table-dark table-striped">
+    <table class="table table-dark table-striped table-bordered">
       <thead>
         <tr>
           <th scope="col" v-for="(item, index) in table_header" :key="index">
@@ -42,3 +42,5 @@ const getDominator = (anyway) => {
   return `cell(${anyway})`
 }
 </script>
+
+<style scoped></style>
