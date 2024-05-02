@@ -65,9 +65,6 @@ const ChooseChild = computed(() => {
   return Now
 })
 
-console.log(MenuRouter.value)
-console.log(ChooseChild.value)
-
 const PushTo = (path) => {
   router.push({ name: path })
 }
