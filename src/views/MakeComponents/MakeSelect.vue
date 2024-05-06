@@ -2,7 +2,7 @@
   <div class="select_object">
     <div class="select_btn">
       <input type="text" v-model="target" placeholder="請填寫文字" />
-      <i class="bx bxs-chevrons-down"></i>
+      <i class="bx bx-search-alt"></i>
     </div>
     <ul class="option_menu">
       <li class="option" v-for="item in filterMenu" :key="item" @click="SearchTo(item)">
@@ -69,11 +69,10 @@ function SearchTo(value) {
       }
     })
   })
-  console.log(value)
 }
 const filterMenu = computed(() => {
   if (target.value === null || target.value === '') {
-    return MenuRouter.value
+    return []
   } else {
     return MenuRouter.value.filter((item) => item.toLowerCase().includes(target.value))
   }
@@ -111,9 +110,9 @@ const filterMenu = computed(() => {
   right: 3px;
   top: calc(50% - 0.5em);
 }
-.select_object.active .select_btn i {
+/* .select_object.active .select_btn i {
   transform: rotate(-180deg);
-}
+} */
 .select_object .option_menu {
   position: absolute;
   width: v-bind(selectBtnWidth);
@@ -138,5 +137,6 @@ const filterMenu = computed(() => {
 }
 .option_menu .option:hover {
   background-color: #dfdfdf;
+  border-radius: 8px;
 }
 </style>
