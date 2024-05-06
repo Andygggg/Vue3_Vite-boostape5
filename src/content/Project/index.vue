@@ -17,16 +17,18 @@ import NavBer from '../../views/Menu/NavBar.vue'
 
 <style scoped>
 .menu_container {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   display: flex;
+  overflow-x: hidden;
 }
 .menu_left {
   width: 70px;
   z-index: 100;
 }
 .menu_right {
-  width: calc(100% - 70px);
+  width: calc(100vw - 70px);
   flex-grow: 1;
+  overflow-y: auto;
 }
 </style>

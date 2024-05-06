@@ -78,7 +78,7 @@ const PushTo = (path) => {
   top: 0;
   height: 100vh;
   background: var(--main-color);
-  z-index: 100;
+  z-index: 9999;
   transition: all 400ms ease;
 }
 .sidebar_brand {
