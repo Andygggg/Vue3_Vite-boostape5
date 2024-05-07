@@ -70,10 +70,10 @@
 }
 ::-webkit-scrollbar-thumb {
   border-radius: 15px;
-  background: #888;
+  background: rgba(0, 0, 0, 0);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #888;
 }
 body {
   min-height: 100vh;
