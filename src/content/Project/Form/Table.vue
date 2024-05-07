@@ -1,6 +1,6 @@
 <template>
   <div class="table_container">
-    <MakeTable :table_header="table" :table_data="table_data">
+    <MakeTable :table_header="table" :table_data="table_data" table_scroll="60vh">
       <template #cell(one)="data">
         <span>{{ data.index }}</span>
       </template>
@@ -16,14 +16,21 @@ import { reactive } from 'vue'
 import MakeTable from '../../../views/MakeComponents/MakeTable.vue'
 
 const table = reactive([
-  { key: 'one', label: 'Number' },
-  { key: 'two', label: 'name' },
-  { key: 'three', label: 'name2' },
-  { key: 'four', label: '@' },
+  { key: 'one', label: 'Number', sort: false },
+  { key: 'two', label: 'name', sort: false },
+  { key: 'date', label: '日期', sort: true },
+  { key: 'four', label: '@', sort: false },
 ])
 const table_data = reactive([
-  { one: '0', two: 'Mark', three: 'Otto', four: '	@mdo' },
-  { one: '1', two: 'Jacob', three: 'Thornton', four: '@fat' },
+  { one: '1', two: 'Mark', date: '2023/5/6', four: '	@mdo' },
+  { one: '2', two: 'Jacob', date: '2023/5/3', four: '@fat' },
+  { one: '3', two: 'Jacob', date: '2023/5/1', four: '@fat' },
+  { one: '4', two: 'Jacob', date: '2023/5/3', four: '@fat' },
+  { one: '5', two: 'Jacob', date: '2023/5/3', four: '@fat' },
+  { one: '6', two: 'Jacob', date: '2023/5/4', four: '@fat' },
+  { one: '7', two: 'Jacob', date: '2023/5/3', four: '@fat' },
+  { one: '8', two: 'Jacob', date: '2023/5/2', four: '@fat' },
+  { one: '9', two: 'Jacob', date: '2023/5/1', four: '@fat' },
 ])
 </script>
 
