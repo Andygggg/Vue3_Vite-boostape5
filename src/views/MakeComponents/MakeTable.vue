@@ -1,29 +1,41 @@
 <template>
-  <div class="table_box">
-    <table class="table table-light table-striped table-bordered">
-      <thead>
-        <tr>
-          <th scope="col" v-for="(item, index) in props.table_header" :key="index">
-            <div v-if="item.sort">
-              {{ item.label }}
-              <span @click="sort(item.key)">click</span>
-            </div>
-            <div v-else>
-              {{ item.label }}
-            </div>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(row, key1) in getTable" :key="key1">
-          <td v-for="(col, key2) in props.table_header" :key="key2">
-            <slot :name="getDominator(col.key)" :item="row" :index="row[col.key]">
-              {{ row[col.key] }}
-            </slot>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div>
+    <div class="table_box">
+      <table class="table table-light table-striped table-bordered">
+        <thead>
+          <tr>
+            <th scope="col" v-for="(item, index) in props.table_header" :key="index">
+              <div v-if="item.sort" class="sort_header">
+                {{ item.label }}
+                <div class="sort_icon">
+                  <span @click="sort('rise', item.key)"><i class="bx bxs-up-arrow"></i></span>
+                  <span @click="sort('down', item.key)"><i class="bx bxs-down-arrow"></i></span>
+                </div>
+              </div>
+              <div v-else>
+                {{ item.label }}
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(row, key1) in tablePage" :key="key1">
+            <td v-for="(col, key2) in props.table_header" :key="key2">
+              <slot :name="getDominator(col.key)" :item="row" :value="row[col.key]">
+                {{ row[col.key] }}
+              </slot>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="GUI_box">
+      <span @click="prevPage">上一頁</span>
+      <div v-for="num in limitPage" :key="num">
+        <span :class="{ number_active: num === currentPage }">{{ num }}</span>
+      </div>
+      <span @click="nextPage">下一頁</span>
+    </div>
   </div>
 </template>
 
@@ -53,30 +65,89 @@ const props = defineProps({
   },
 })
 
+//表格slot命名
 const getDominator = (anyway) => {
   return `cell(${anyway})`
 }
 
+//表格排序功能
 const headKey = ref(null)
+const valSort = ref(null)
 
 const getTable = computed(() => {
   const table = ref(toRaw(props.table_data))
-  console.log(3)
-  if (headKey.value === null) {
-    console.log(1)
-    return table.value
-  } else {
-    console.log(2)
-    const sortTable = table.value.sort((a, b) => {
+  if (valSort.value === 'rise') {
+    const sortRiseTable = table.value.sort((a, b) => {
       return a[headKey.value] > b[headKey.value] ? 1 : -1
     })
-    return sortTable
+    return sortRiseTable
+  } else if (valSort.value === 'down') {
+    const sortDownTable = table.value.sort((a, b) => {
+      return a[headKey.value] < b[headKey.value] ? 1 : -1
+    })
+    return sortDownTable
+  } else {
+    return table.value
   }
 })
 
-const sort = (key) => {
-  headKey.value = key
+const sort = (val, key) => {
+  if (val === valSort.value) {
+    headKey.value = null
+    valSort.value = null
+  } else {
+    headKey.value = key
+    valSort.value = val
+  }
 }
+
+//表格分頁功能
+const currentPage = ref(1)
+const dataLimit = ref(1)
+const allPage = ref(Math.ceil(getTable.value.length / dataLimit.value))
+const initNumber = ref(0)
+
+const nextPage = () => {
+  if (currentPage.value < allPage.value) {
+    currentPage.value++
+    initNumber.value = initNumber.value + dataLimit.value
+  }
+  console.log(limitPage.value, currentPage.value)
+}
+
+const prevPage = () => {
+  if (currentPage.value > 1) {
+    currentPage.value--
+    initNumber.value = initNumber.value - dataLimit.value
+  }
+  console.log(limitPage.value, currentPage.value)
+}
+const tablePage = computed(() => {
+  return getTable.value.slice(initNumber.value, initNumber.value + dataLimit.value)
+})
+
+const limitPage = computed(() => {
+  let limit_pages = []
+  let start = currentPage.value
+  const limit_number = 2
+  let end = start + limit_number
+
+  if (allPage.value <= 1 + limit_number) {
+    console.log(777)
+    start = 1
+    end = allPage.value
+  } else if (currentPage.value >= allPage.value - limit_number) {
+    console.log(888)
+    start = allPage.value - limit_number
+    end = allPage.value
+  }
+
+  for (let index = start; index <= end; index++) {
+    limit_pages.push(index)
+  }
+  console.log(end)
+  return limit_pages
+})
 </script>
 
 <style scoped>
@@ -112,5 +183,31 @@ const sort = (key) => {
 }
 .table_box tbody tr:nth-of-type(odd) {
   background-color: rgba(221, 221, 221, 0.8) !important;
+}
+.sort_header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sort_icon {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0.5rem;
+}
+.sort_icon span {
+  font-size: 0.6rem;
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+}
+.GUI_box {
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.number_active {
+  color: red;
+  font-size: 1.2rem;
 }
 </style>
