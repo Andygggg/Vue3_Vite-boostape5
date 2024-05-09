@@ -1,6 +1,12 @@
 <template>
   <div class="table_container">
-    <MakeTable :table_header="table" :table_data="table_data" table_scroll="60vh">
+    <MakeTable
+      :table_header="table"
+      :table_data="table_data"
+      table_scroll="60vh"
+      :table_pagination="true"
+      :table_page="4"
+    >
       <template #cell(one)="data">
         <span>{{ data.value }}</span>
       </template>
@@ -31,6 +37,15 @@ const table_data = reactive([
   { one: '7', two: 'Jacob', date: '2023/5/3', four: '@fat' },
   { one: '8', two: 'Jacob', date: '2023/5/2', four: '@fat' },
   { one: '9', two: 'Jacob', date: '2023/5/1', four: '@fat' },
+  { one: '10', two: 'Jacob', date: '2023/5/6', four: '@mdo' },
+  { one: '11', two: 'Jacob', date: '2023/5/3', four: '@fat' },
+  { one: '12', two: 'Jacob', date: '2023/5/1', four: '@mdo' },
+  { one: '13', two: 'Jacob', date: '2023/5/3', four: '@fat' },
+  { one: '14', two: 'Jacob', date: '2023/5/3', four: '@fat' },
+  { one: '15', two: 'Jacob', date: '2023/5/4', four: '@fat' },
+  { one: '16', two: 'Jacob', date: '2023/5/3', four: '@fat' },
+  { one: '17', two: 'Jacob', date: '2023/5/2', four: '@fat' },
+  { one: '18', two: 'Jacob', date: '2023/5/1', four: '@fat' },
 ])
 </script>
 
