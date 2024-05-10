@@ -26,6 +26,15 @@ const router = createRouter({
                 isOnSidebar: true,
               },
             },
+            {
+              path: 'modal',
+              name: 'Modal',
+              component: () => import('../content/Project/Form/Modal.vue'),
+              meta: {
+                title: '互動視窗',
+                isOnSidebar: true,
+              },
+            },
           ],
         },
         {
