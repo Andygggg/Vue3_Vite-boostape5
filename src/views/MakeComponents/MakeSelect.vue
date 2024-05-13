@@ -95,8 +95,8 @@ const filterMenu = computed(() => {
   border: none;
   padding: 0.5rem;
   border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 400;
+  font-size: 1rem;
+  font-weight: 900;
   color: black;
   outline: none;
 }
@@ -118,25 +118,31 @@ const filterMenu = computed(() => {
   width: v-bind(selectBtnWidth);
   border-radius: 8px;
   background-color: #ffffff;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
   list-style: none;
   display: none;
   padding: 0%;
+  border: 1px rgba(201, 201, 201, 0.671) solid;
 }
 .select_object.active .option_menu {
   display: block;
+  margin: 0;
 }
 .option_menu .option {
   display: flex;
   cursor: pointer;
   align-items: center;
+  margin: 0;
 }
 .option span {
-  padding-left: 1.3rem;
-  padding-bottom: 0.3rem;
+  padding-left: 0.5rem;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  font-size: 1rem;
+  font-weight: 600;
 }
 .option_menu .option:hover {
-  background-color: #dfdfdf;
+  background-color: #65b7e04f;
   border-radius: 8px;
 }
 </style>

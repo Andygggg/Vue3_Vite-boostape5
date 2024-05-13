@@ -21,6 +21,13 @@ import MakeSelect from '../MakeComponents/MakeSelect.vue'
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
+.navbar-brand {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
 .long {
   width: 30%;
 }
@@ -46,5 +53,8 @@ import MakeSelect from '../MakeComponents/MakeSelect.vue'
 .user_data span {
   font-weight: 500;
   color: black;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 </style>

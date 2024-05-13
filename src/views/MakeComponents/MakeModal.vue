@@ -10,10 +10,12 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="myModalLabel">Modal title</h5>
+          <span class="modal_title" id="myModalLabel">{{ props.title }}</span>
           <button type="button" class="btn-close" @click="closeModal"></button>
         </div>
-        <div class="modal-body">...</div>
+        <div class="modal-body">
+          <slot> 資料加載中 </slot>
+        </div>
       </div>
     </div>
   </div>
@@ -31,6 +33,10 @@ const props = defineProps({
     },
     required: true,
   },
+  title: {
+    type: String,
+    required: true,
+  },
 })
 const emits = defineEmits(['closeEvent'])
 
@@ -40,23 +46,11 @@ onMounted(() => {
   modal.value = new Modal(document.getElementById('myModal'))
 })
 
-// const showModal = () => {
-//   modalOpen.value = true
-//   controlModal()
-// }
-
 const closeModal = () => {
   modal.value.hide()
   emits('closeEvent')
 }
 
-// const controlModal = () => {
-//   if (props.modalOpen) {
-//     modal.value.show()
-//   } else {
-//     modal.value.hide()
-//   }
-// }
 const isShow = computed(() => {
   return props.modalOpen
 })
@@ -68,3 +62,18 @@ watch(isShow, (newVal, oldVal) => {
   }
 })
 </script>
+
+<style scoped>
+.modal {
+  --bs-modal-width: max-content;
+}
+.modal-header {
+  background-color: rgb(207, 207, 207);
+}
+.modal_title {
+  margin-bottom: 0;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: black;
+}
+</style>
