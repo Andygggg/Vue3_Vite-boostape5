@@ -60,7 +60,21 @@
   margin: 0;
   font-weight: normal;
 }
-
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 15px;
+  background: rgba(0, 0, 0, 0);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
 body {
   min-height: 100vh;
   color: var(--color-text);
