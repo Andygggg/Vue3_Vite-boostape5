@@ -26,7 +26,7 @@
           </div>
         </li>
         <li>
-          <div class="footer">
+          <div class="footer" @click="signOut">
             <i class="bx bx-log-out"></i>
             <span>登出</span>
           </div>
@@ -67,6 +67,10 @@ const ChooseChild = computed(() => {
 
 const PushTo = (path) => {
   router.push({ name: path })
+}
+
+const signOut = () => {
+  router.push({ name: 'SignIn' })
 }
 </script>
 
