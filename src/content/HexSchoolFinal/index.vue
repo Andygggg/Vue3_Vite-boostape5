@@ -6,8 +6,6 @@
 
 <script setup>
 import { RouterView } from 'vue-router'
-
-console.log(import.meta.env.VITE_APP_API, import.meta.env.VITE_APP_PATH)
 </script>
 
 <style scoped></style>

@@ -1,28 +1,26 @@
 <template>
   <div class="login_box">
     <div class="wrapper">
-      <form action="">
-        <h1>Login</h1>
-        <div class="input_box">
-          <input type="text" placeholder="UserName" v-model="user.account" required />
-          <i class="bx bxs-user"></i>
-        </div>
-        <div class="input_box">
-          <input type="password" placeholder="PassWord" v-model="user.password" required />
-          <i class="bx bxs-lock-alt"></i>
-        </div>
-        <div class="remember_forget">
-          <label> <input type="checkbox" />Remember me </label>
-          <a href="#">Forgot password?</a>
-        </div>
-        <button type="submit" class="btn_login" @click="PushToProject">Login</button>
-        <div class="register_link">
-          <p>
-            Don't have an account?
-            <a href="#">Register</a>
-          </p>
-        </div>
-      </form>
+      <h1>Login</h1>
+      <div class="input_box">
+        <input type="text" placeholder="UserName" v-model="User.username" required />
+        <i class="bx bxs-user"></i>
+      </div>
+      <div class="input_box">
+        <input type="password" placeholder="PassWord" v-model="User.password" required />
+        <i class="bx bxs-lock-alt"></i>
+      </div>
+      <div class="remember_forget">
+        <label> <input type="checkbox" />Remember me </label>
+        <a href="#">Forgot password?</a>
+      </div>
+      <button type="submit" class="btn_login" @click="PushToProject">Login</button>
+      <div class="register_link">
+        <p>
+          Don't have an account?
+          <a href="#">Register</a>
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -30,17 +28,20 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { userSignIn } from '@/stores/signIn.js'
 
 const router = useRouter()
-const user = ref({
-  account: '',
-  password: '',
+const User = ref({
+  username: 'hexscholl@test.com',
+  password: 'zzxxccvv',
 })
 
-function PushToProject() {
-  if (user.value.account === '123') {
+const SignIn = userSignIn()
+const PushToProject = () => {
+  if (User.value.username === '123') {
     router.push({ name: 'Project' })
   } else {
+    SignIn.userSignIn(User.value)
     router.push({ name: 'HexSchoolFinal' })
   }
 }
