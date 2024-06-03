@@ -18,17 +18,17 @@ const router = createRouter({
     },
     //六角課程最終作業
     {
-      path: '/HexSchoolFinal',
+      path: '/DashBoard',
       name: 'HexSchoolFinal',
       component: () => import('../content/HexSchoolFinal/index.vue'),
       children: [
         {
-          path: 'dashBoard',
-          name: 'DashBoard',
-          component: () => import('../content/HexSchoolFinal/DashBoard.vue'),
+          path: 'product',
+          name: 'product',
+          component: () => import('../content/HexSchoolFinal/product.vue'),
         },
       ],
-      redirect: { name: 'DashBoard' },
+      redirect: { name: 'product' },
     },
     //自己玩
     {
