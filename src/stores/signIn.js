@@ -47,7 +47,10 @@ export const userSignIn = defineStore('signIn', () => {
     try {
       axios.post('logout').then((res) => {
         console.log(res.data)
-        router.push({ name: 'UserLogin' })
+        if (res.data.success) {
+          alert('已登出')
+          router.push({ name: 'UserLogin' })
+        }
       })
     } catch (error) {
       console.log(error)
