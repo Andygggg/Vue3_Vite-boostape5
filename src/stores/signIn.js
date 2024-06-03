@@ -42,5 +42,17 @@ export const userSignIn = defineStore('signIn', () => {
     }
   }
 
-  return { userSignIn, checkSignIn }
+  //登出
+  const userLogout = () => {
+    try {
+      axios.post('logout').then((res) => {
+        console.log(res.data)
+        router.push({ name: 'UserLogin' })
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  return { userSignIn, checkSignIn, userLogout }
 })
