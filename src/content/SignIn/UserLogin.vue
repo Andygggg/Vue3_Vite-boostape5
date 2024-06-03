@@ -42,7 +42,6 @@ const PushToProject = () => {
     router.push({ name: 'Project' })
   } else {
     SignIn.userSignIn(User.value)
-    router.push({ name: 'HexSchoolFinal' })
   }
 }
 </script>

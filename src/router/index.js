@@ -21,7 +21,14 @@ const router = createRouter({
       path: '/HexSchoolFinal',
       name: 'HexSchoolFinal',
       component: () => import('../content/HexSchoolFinal/index.vue'),
-      children: [],
+      children: [
+        {
+          path: 'dashBoard',
+          name: 'DashBoard',
+          component: () => import('../content/HexSchoolFinal/DashBoard.vue'),
+        },
+      ],
+      redirect: { name: 'DashBoard' },
     },
     //自己玩
     {

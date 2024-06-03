@@ -310,7 +310,7 @@ $dark:          $gray-900 !default;
 
 // scss-docs-start theme-colors-map
 $theme-colors: (
-  "primary":    red,
+  "primary":    $primary,
   "secondary":  $secondary,
   "success":    $success,
   "info":       $info,
@@ -319,6 +319,14 @@ $theme-colors: (
   "light":      $light,
   "dark":       $dark
 ) !default;
+
+//自訂顏色
+$custom-colors: (
+  "light_pulper": #ce92ff,
+);
+
+// Merge the maps
+$theme-colors: map-merge($theme-colors, $custom-colors);
 // scss-docs-end theme-colors-map
 
 // scss-docs-start theme-text-variables

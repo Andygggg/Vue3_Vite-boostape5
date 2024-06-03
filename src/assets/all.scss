@@ -1,6 +1,9 @@
-@import "../node_modules/bootstrap/scss/functions";
-@import "./helper/variables";
-@import "../node_modules/bootstrap/scss/mixins";
-// @import "../node_modules/bootstrap/scss/root";
+@import "bootstrap/scss/functions";
 
-@import "../node_modules/bootstrap/scss/bootstrap";
+@import "./helper/variables";
+@import "./helper/_variables-dark";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/maps";
+// @import "bootstrap/scss/root";
+
+@import "bootstrap/scss/bootstrap";
