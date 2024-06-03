@@ -5,6 +5,34 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'SignIn',
+      component: () => import('../content/SignIn/index.vue'),
+      children: [
+        {
+          path: 'UserLogin',
+          name: 'UserLogin',
+          component: () => import('../content/SignIn/UserLogin.vue'),
+        },
+      ],
+      redirect: { name: 'UserLogin' },
+    },
+    //六角課程最終作業
+    {
+      path: '/HexSchoolFinal',
+      name: 'HexSchoolFinal',
+      component: () => import('../content/HexSchoolFinal/index.vue'),
+      children: [
+        {
+          path: 'dashBoard',
+          name: 'DashBoard',
+          component: () => import('../content/HexSchoolFinal/DashBoard.vue'),
+        },
+      ],
+      redirect: { name: 'DashBoard' },
+    },
+    //自己玩
+    {
+      path: '/Project',
       name: 'Project',
       component: () => import('../content/Project/index.vue'),
       children: [
