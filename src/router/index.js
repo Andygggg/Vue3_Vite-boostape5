@@ -20,15 +20,15 @@ const router = createRouter({
     {
       path: '/DashBoard',
       name: 'HexSchoolFinal',
-      component: () => import('../content/HexSchoolFinal/index.vue'),
+      component: () => import('../content/HexSchoolFinal/DashBoard.vue'),
       children: [
         {
-          path: 'product',
-          name: 'product',
-          component: () => import('../content/HexSchoolFinal/product.vue'),
+          path: 'ProductList',
+          name: 'ProductList',
+          component: () => import('../content/HexSchoolFinal/ProductList.vue'),
         },
       ],
-      redirect: { name: 'product' },
+      redirect: { name: 'ProductList' },
     },
     //自己玩
     {
