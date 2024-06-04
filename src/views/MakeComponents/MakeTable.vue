@@ -1,10 +1,15 @@
 <template>
   <div>
     <div class="table_box">
-      <table class="table table-light table-striped table-bordered">
+      <table class="table-striped table-bordered">
         <thead>
           <tr>
-            <th scope="col" v-for="(item, index) in props.table_header" :key="index">
+            <th
+              scope="col"
+              v-for="(item, index) in props.table_header"
+              :key="index"
+              :width="item.width"
+            >
               <div v-if="item.sort" class="sort_header">
                 {{ item.label }}
                 <div class="sort_icon">
@@ -195,10 +200,11 @@ const limitPage = computed(() => {
 }
 .table_box th {
   background-color: var(--main-color);
-  padding: 1rem;
   color: #ffffff;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  font-weight: 600;
   text-align: center;
+  padding: 0.8rem 0 0.8rem 0;
 }
 .table_box thead {
   position: sticky;
@@ -207,12 +213,13 @@ const limitPage = computed(() => {
 .table_box td {
   padding: 1rem;
   text-align: center;
+  vertical-align: middle;
   color: black;
   font-size: 1rem;
   font-weight: 500;
 }
 .table_box tbody tr:nth-of-type(odd) {
-  background-color: rgba(221, 221, 221, 0.8) !important;
+  background-color: #f3f3f3 !important;
 }
 /* 表格排序icon */
 .sort_header {

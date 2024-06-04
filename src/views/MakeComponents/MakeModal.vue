@@ -67,6 +67,9 @@ watch(isShow, (newVal, oldVal) => {
 .modal {
   --bs-modal-width: max-content;
 }
+.modal-content {
+  min-width: 200px;
+}
 .modal-header {
   background-color: rgb(207, 207, 207);
 }

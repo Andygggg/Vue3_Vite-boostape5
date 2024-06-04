@@ -22,7 +22,7 @@ import { reactive } from 'vue'
 import MakeTable from '../../../views/MakeComponents/MakeTable.vue'
 
 const table = reactive([
-  { key: 'one', label: 'Number', sort: true },
+  { key: 'one', label: 'Number', sort: true, width: '200' },
   { key: 'two', label: 'name', sort: false },
   { key: 'date', label: '日期', sort: true },
   { key: 'four', label: '@', sort: false },
