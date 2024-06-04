@@ -7,7 +7,6 @@ export const axiosSetting = defineStore('setting', () => {
       /(?:(?:^|.*;\s*)axiosToken\s*=\s*([^;]*).*$)|^.*$/,
       '$1',
     )
-    console.log(axiosCookie)
     axios.defaults.headers.common['Authorization'] = axiosCookie
   }
   return { getCookie }

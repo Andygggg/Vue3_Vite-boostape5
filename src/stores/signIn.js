@@ -11,7 +11,7 @@ export const userSignIn = defineStore('signIn', () => {
   const userSignIn = async (user) => {
     try {
       await axios.post('admin/signin', user).then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         if (res.data.success) {
           const { token, expired } = res.data
           document.cookie = `axiosToken=${token}; expires=${new Date(expired)}`
@@ -31,7 +31,7 @@ export const userSignIn = defineStore('signIn', () => {
     try {
       axios_setting.getCookie()
       axios.post('api/user/check').then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         if (!res.data.success) {
           alert('請重新登入')
           router.push({ name: 'UserLogin' })
@@ -46,7 +46,7 @@ export const userSignIn = defineStore('signIn', () => {
   const userLogout = () => {
     try {
       axios.post('logout').then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         if (res.data.success) {
           alert('已登出')
           router.push({ name: 'UserLogin' })

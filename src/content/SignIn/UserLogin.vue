@@ -32,8 +32,8 @@ import { userSignIn } from '@/stores/signIn.js'
 
 const router = useRouter()
 const User = ref({
-  username: 'hexscholl@test.com',
-  password: 'zzxxccvv',
+  username: 'andyhello31468@gmail.com',
+  password: 'andy0314',
 })
 
 const SignIn = userSignIn()
