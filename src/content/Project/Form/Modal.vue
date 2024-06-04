@@ -1,6 +1,7 @@
 <template>
   <div class="modal_box">
     <MakeButton @click="showModal">showModal</MakeButton>
+    <MakeButton @click="showModal" btn_class="btn_blue">showModal</MakeButton>
     <MakeModal :modal-open="show" title="我是modal" @closeEvent="closeModal">
       <ModalA></ModalA>
     </MakeModal>
@@ -28,5 +29,6 @@ const closeModal = () => {
 <style scoped>
 .modal_box {
   padding: 1rem;
+  display: flex;
 }
 </style>
