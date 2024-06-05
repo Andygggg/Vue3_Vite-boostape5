@@ -54,8 +54,8 @@ const closeModal = () => {
 const isShow = computed(() => {
   return props.modalOpen
 })
-watch(isShow, (newVal, oldVal) => {
-  if (newVal === true || oldVal === true) {
+watch(isShow, (newVal) => {
+  if (newVal === true) {
     modal.value.show()
   } else {
     modal.value.hide()

@@ -1,9 +1,13 @@
 <template>
   <div class="product_box">
     <div class="btn_box">
-      <MakeButton btn_class="btn_blue" @click="addProduct">新增產品</MakeButton>
+      <MakeButton btn_class="btn_blue" @click="addProduct(true)">新增產品</MakeButton>
     </div>
-    <MakeTable :table_header="productHeader" :table_data="control_Product.product_list">
+    <MakeTable
+      :table_header="productHeader"
+      :table_data="control_Product.product_list"
+      table_scroll="60vh"
+    >
       <template #cell(category)="data">
         <span>{{ data.value }}</span>
       </template>
@@ -20,9 +24,9 @@
         <span class="text-success" v-if="data.value">啟用</span>
         <span class="text-muted" v-else>未啟用</span>
       </template>
-      <template #cell(edit)>
+      <template #cell(edit)="data">
         <div class="btn-group">
-          <button class="btn btn-outline-primary btn-sm">
+          <button class="btn btn-outline-primary btn-sm" @click="addProduct(false, data.item)">
             <i class="bx bxs-pencil"></i>
           </button>
           <button class="btn btn-outline-danger btn-sm">
@@ -33,7 +37,7 @@
     </MakeTable>
   </div>
   <MakeModal :modal-open="show" title="新增產品" @closeEvent="closeModal">
-    <ProductModal></ProductModal>
+    <ProductModal @closeEvent="closeModal" :product="Product_data"></ProductModal>
   </MakeModal>
 </template>
 
@@ -61,9 +65,17 @@ const productHeader = reactive([
   { key: 'edit', label: '編輯', sort: false, width: '200' },
 ])
 
+//帶入modal產品資訊
+const Product_data = ref({})
+
 //新增產品modal
 const show = ref(false)
-const addProduct = () => {
+const addProduct = (isNew, item) => {
+  if (isNew) {
+    Product_data.value = {}
+  } else {
+    Product_data.value = { ...item }
+  }
   show.value = true
 }
 const closeModal = () => {
