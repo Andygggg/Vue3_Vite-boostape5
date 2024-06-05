@@ -5,6 +5,34 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'SignIn',
+      component: () => import('../content/SignIn/index.vue'),
+      children: [
+        {
+          path: 'UserLogin',
+          name: 'UserLogin',
+          component: () => import('../content/SignIn/UserLogin.vue'),
+        },
+      ],
+      redirect: { name: 'UserLogin' },
+    },
+    //六角課程最終作業
+    {
+      path: '/DashBoard',
+      name: 'HexSchoolFinal',
+      component: () => import('../content/HexSchoolFinal/DashBoard.vue'),
+      children: [
+        {
+          path: 'ProductList',
+          name: 'ProductList',
+          component: () => import('../content/HexSchoolFinal/ProductList.vue'),
+        },
+      ],
+      redirect: { name: 'ProductList' },
+    },
+    //自己玩
+    {
+      path: '/Project',
       name: 'Project',
       component: () => import('../content/Project/index.vue'),
       children: [
@@ -23,6 +51,15 @@ const router = createRouter({
               component: () => import('../content/Project/Form/Table.vue'),
               meta: {
                 title: '表格',
+                isOnSidebar: true,
+              },
+            },
+            {
+              path: 'modal',
+              name: 'Modal',
+              component: () => import('../content/Project/Form/Modal.vue'),
+              meta: {
+                title: '互動視窗',
                 isOnSidebar: true,
               },
             },

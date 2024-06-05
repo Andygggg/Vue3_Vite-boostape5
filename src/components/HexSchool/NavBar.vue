@@ -2,10 +2,9 @@
   <div>
     <nav class="navbar navbar-light" style="background-color: #e6e3fd">
       <div class="container-fluid">
-        <a class="navbar-brand">隨便玩玩bootstrap5{{ web_version }}版</a>
-        <MakeSelect class="long"></MakeSelect>
+        <a class="navbar-brand">六角學院vue3最終作業</a>
         <div class="user_menu">
-          <div class="user_picture">123</div>
+          <div class="user_picture" @click="Logout.userLogout">登出</div>
           <div class="user_data">
             <span>andy WU</span>
             <span>隨便玩玩</span>
@@ -17,10 +16,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import MakeSelect from '../MakeComponents/MakeSelect.vue'
-
-const web_version = ref(import.meta.env.VITE_APP_TITLE)
+import { userSignIn } from '@/stores/signIn.js'
+const Logout = userSignIn()
 </script>
 
 <style scoped>

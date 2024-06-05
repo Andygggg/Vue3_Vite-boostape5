@@ -26,7 +26,7 @@
           </div>
         </li>
         <li>
-          <div class="footer">
+          <div class="footer" @click="signOut">
             <i class="bx bx-log-out"></i>
             <span>登出</span>
           </div>
@@ -65,11 +65,12 @@ const ChooseChild = computed(() => {
   return Now
 })
 
-console.log(MenuRouter.value)
-console.log(ChooseChild.value)
-
 const PushTo = (path) => {
   router.push({ name: path })
+}
+
+const signOut = () => {
+  router.push({ name: 'SignIn' })
 }
 </script>
 
@@ -81,7 +82,7 @@ const PushTo = (path) => {
   top: 0;
   height: 100vh;
   background: var(--main-color);
-  z-index: 100;
+  z-index: 9999;
   transition: all 400ms ease;
 }
 .sidebar_brand {
