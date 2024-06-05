@@ -33,7 +33,7 @@
     </MakeTable>
   </div>
   <MakeModal :modal-open="show" title="新增產品" @closeEvent="closeModal">
-    <ProductModal></ProductModal>
+    <ProductModal @closeEvent="closeModal" :product="Product_data"></ProductModal>
   </MakeModal>
 </template>
 
@@ -61,9 +61,13 @@ const productHeader = reactive([
   { key: 'edit', label: '編輯', sort: false, width: '200' },
 ])
 
+//帶入modal產品資訊
+const Product_data = ref({})
+
 //新增產品modal
 const show = ref(false)
 const addProduct = () => {
+  Product_data.value = {}
   show.value = true
 }
 const closeModal = () => {

@@ -27,28 +27,58 @@
     <div class="col-sm-8">
       <div class="mb-3">
         <label for="title" class="form-label">標題</label>
-        <input type="text" class="form-control" id="title" placeholder="請輸入標題" />
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          v-model="tempProduct.title"
+          placeholder="請輸入標題"
+        />
       </div>
 
       <div class="row gx-2">
         <div class="mb-3 col-md-6">
           <label for="category" class="form-label">分類</label>
-          <input type="text" class="form-control" id="category" placeholder="請輸入分類" />
+          <input
+            type="text"
+            class="form-control"
+            id="category"
+            v-model="tempProduct.category"
+            placeholder="請輸入分類"
+          />
         </div>
         <div class="mb-3 col-md-6">
           <label for="price" class="form-label">單位</label>
-          <input type="text" class="form-control" id="unit" placeholder="請輸入單位" />
+          <input
+            type="text"
+            class="form-control"
+            id="unit"
+            v-model="tempProduct.unit"
+            placeholder="請輸入單位"
+          />
         </div>
       </div>
 
       <div class="row gx-2">
         <div class="mb-3 col-md-6">
           <label for="origin_price" class="form-label">原價</label>
-          <input type="number" class="form-control" id="origin_price" placeholder="請輸入原價" />
+          <input
+            type="number"
+            class="form-control"
+            id="origin_price"
+            v-model="tempProduct.origin_price"
+            placeholder="請輸入原價"
+          />
         </div>
         <div class="mb-3 col-md-6">
           <label for="price" class="form-label">售價</label>
-          <input type="number" class="form-control" id="price" placeholder="請輸入售價" />
+          <input
+            type="number"
+            class="form-control"
+            id="price"
+            v-model="tempProduct.price"
+            placeholder="請輸入售價"
+          />
         </div>
       </div>
       <hr />
@@ -59,6 +89,7 @@
           type="text"
           class="form-control"
           id="description"
+          v-model="tempProduct.description"
           placeholder="請輸入產品描述"
         ></textarea>
       </div>
@@ -68,6 +99,7 @@
           type="text"
           class="form-control"
           id="content"
+          v-model="tempProduct.content"
           placeholder="請輸入產品說明內容"
         ></textarea>
       </div>
@@ -78,6 +110,7 @@
             type="checkbox"
             :true-value="1"
             :false-value="0"
+            v-model="tempProduct.is_enabled"
             id="is_enabled"
           />
           <label class="form-check-label" for="is_enabled"> 是否啟用 </label>
@@ -86,12 +119,45 @@
     </div>
   </div>
   <div class="footer">
-    <button type="button" class="btn btn_save">確認</button>
-    <button type="button" class="btn btn_cancel">取消</button>
+    <button type="button" class="btn btn_save" @click="saveProduct">確認</button>
+    <button type="button" class="btn btn_cancel" @click="closeModal">取消</button>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref, watch } from 'vue'
+import { controlProduct } from '@/stores/productList.js'
+
+const emits = defineEmits(['closeEvent'])
+const props = defineProps({
+  product: {
+    type: Object,
+    default() {
+      return {}
+    },
+  },
+})
+
+const closeModal = () => {
+  emits('closeEvent')
+}
+
+const control_Product = controlProduct()
+const saveProduct = () => {
+  control_Product.addProduct(tempProduct.value)
+  closeModal()
+}
+
+const tempProduct = ref({})
+
+watch(
+  () => props.product,
+  (newVal) => {
+    tempProduct.value = newVal
+  },
+  { deep: true },
+)
+</script>
 
 <style scoped>
 .footer {

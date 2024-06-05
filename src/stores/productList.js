@@ -16,5 +16,15 @@ export const controlProduct = defineStore('controlProduct', () => {
       })
   }
 
-  return { product_list, getProductList }
+  const addProduct = (product) => {
+    axios
+      .post(`api/${import.meta.env.VITE_APP_PATH}/admin/product`, { data: product })
+      .then((res) => {
+        console.log(res)
+        getProductList()
+        alert(res.data.message)
+      })
+  }
+
+  return { product_list, getProductList, addProduct }
 })
