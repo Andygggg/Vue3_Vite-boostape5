@@ -10,9 +10,15 @@
           >或 上傳圖片
           <i class="fas fa-spinner fa-spin"></i>
         </label>
-        <input type="file" id="customFile" class="form-control" />
+        <input
+          type="file"
+          id="customFile"
+          ref="inputFile"
+          @change="uploadImg"
+          class="form-control"
+        />
       </div>
-      <img class="img-fluid" alt="" />
+      <img class="img-fluid" alt="" :src="tempProduct.imageUrl" />
       <!-- 延伸技巧，多圖 -->
       <div class="mt-5">
         <div class="mb-3 input-group">
@@ -144,7 +150,11 @@ const closeModal = () => {
 
 const control_Product = controlProduct()
 const saveProduct = () => {
-  control_Product.addProduct(tempProduct.value)
+  if (tempProduct.value.id) {
+    control_Product.editsProduct(tempProduct.value)
+  } else {
+    control_Product.addProduct(tempProduct.value)
+  }
   closeModal()
 }
 
@@ -154,9 +164,19 @@ watch(
   () => props.product,
   (newVal) => {
     tempProduct.value = newVal
+    inputFile.value.value = null
   },
   { deep: true },
 )
+
+const inputFile = ref(null)
+const uploadImg = async () => {
+  const uploadFile = inputFile.value.files[0]
+  const formData = new FormData()
+  formData.append('file-to-upload', uploadFile)
+  await control_Product.uploadProductImg(formData)
+  tempProduct.value.imageUrl = control_Product.currentImgHttp
+}
 </script>
 
 <style scoped>
