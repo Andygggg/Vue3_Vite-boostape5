@@ -209,6 +209,7 @@ const limitPage = computed(() => {
 .table_box thead {
   position: sticky;
   top: 0;
+  z-index: 10;
 }
 .table_box td {
   padding: 1rem;
