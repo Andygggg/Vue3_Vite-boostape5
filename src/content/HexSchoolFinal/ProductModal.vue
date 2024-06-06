@@ -174,8 +174,7 @@ const uploadImg = async () => {
   const uploadFile = inputFile.value.files[0]
   const formData = new FormData()
   formData.append('file-to-upload', uploadFile)
-  await control_Product.uploadProductImg(formData)
-  tempProduct.value.imageUrl = control_Product.currentImgHttp
+  tempProduct.value.imageUrl = await control_Product.uploadProductImg(formData)
 }
 </script>
 

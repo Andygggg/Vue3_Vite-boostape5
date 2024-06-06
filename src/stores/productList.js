@@ -8,52 +8,85 @@ export const controlProduct = defineStore('controlProduct', () => {
 
   //獲取產品清單
   const getProductList = async () => {
-    await axios
-      .get(`api/${import.meta.env.VITE_APP_PATH}/admin/products?page=:page`)
-      .then((res) => {
-        // console.log(res)
-        if (res.data.success) {
-          product_list.value = res.data.products
-        }
-      })
+    try {
+      await axios
+        .get(`api/${import.meta.env.VITE_APP_PATH}/admin/products?page=:page`)
+        .then((res) => {
+          // console.log(res)
+          if (res.data.success) {
+            product_list.value = res.data.products
+          }
+        })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   //新增產品清單
   const addProduct = (product) => {
-    axios
-      .post(`api/${import.meta.env.VITE_APP_PATH}/admin/product`, { data: product })
-      .then((res) => {
-        // console.log(res)
-        if (res.data.success) {
-          getProductList()
-        }
-        alert(res.data.message)
-      })
+    try {
+      axios
+        .post(`api/${import.meta.env.VITE_APP_PATH}/admin/product`, { data: product })
+        .then((res) => {
+          // console.log(res)
+          if (res.data.success) {
+            getProductList()
+          }
+          alert(res.data.message)
+        })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  //編輯產品清單
+  //編輯產品
   const editsProduct = (product) => {
-    axios
-      .put(`api/${import.meta.env.VITE_APP_PATH}/admin/product/${product.id}`, { data: product })
-      .then((res) => {
-        console.log(res)
-        if (res.data.success) {
-          getProductList()
-        }
-        alert(res.data.message)
-      })
+    try {
+      axios
+        .put(`api/${import.meta.env.VITE_APP_PATH}/admin/product/${product.id}`, { data: product })
+        .then((res) => {
+          console.log(res)
+          if (res.data.success) {
+            getProductList()
+          }
+          alert(res.data.message)
+        })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  //目前圖片網址
-  const currentImgHttp = ref('')
+  //刪除產品
+  const delProduct = (product_id) => {
+    try {
+      console.log(product_id);
+      const check = confirm('確定刪除?')
+      if (check) {
+        axios
+        .delete(`api/${import.meta.env.VITE_APP_PATH}/admin/product/${product_id}`)
+        .then((res) => {
+          console.log(res)
+          if (res.data.success) {
+            getProductList()
+          }
+          alert(res.data.message)
+        }) 
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   //上傳圖片
   const uploadProductImg = async (img) => {
-    await axios.post(`api/${import.meta.env.VITE_APP_PATH}/admin/upload`, img).then((res) => {
-      console.log(res)
-      if (res.data.success) {
-        currentImgHttp.value = res.data.imageUrl
+    try {
+      const { success,imageUrl} =  (await axios.post(`api/${import.meta.env.VITE_APP_PATH}/admin/upload`, img)).data
+      if(success){
+        return imageUrl
       }
-    })
+    } catch (error) {
+      console.log();
+    }
   }
 
   return {
@@ -62,6 +95,6 @@ export const controlProduct = defineStore('controlProduct', () => {
     addProduct,
     editsProduct,
     uploadProductImg,
-    currentImgHttp,
+    delProduct,
   }
 })

@@ -10,17 +10,15 @@ export const userSignIn = defineStore('signIn', () => {
   //使用者登入api
   const userSignIn = async (user) => {
     try {
-      await axios.post('admin/signin', user).then((res) => {
-        // console.log(res.data)
-        if (res.data.success) {
-          const { token, expired } = res.data
-          document.cookie = `axiosToken=${token}; expires=${new Date(expired)}`
-          axios_setting.getCookie()
-          router.push({ name: 'HexSchoolFinal' })
-        } else {
-          alert('登入失敗')
-        }
-      })
+      const res = await axios.post('admin/signin', user)
+      if (res.data.success) {
+        const { token, expired } = res.data
+        document.cookie = `axiosToken=${token}; expires=${new Date(expired)}`
+        axios_setting.getCookie()
+        router.push({ name: 'HexSchoolFinal' })
+      } else {
+        alert('登入失敗')
+      }
     } catch (error) {
       console.log(error)
     }
