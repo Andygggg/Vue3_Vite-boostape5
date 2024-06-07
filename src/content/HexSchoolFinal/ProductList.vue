@@ -6,7 +6,7 @@
     <MakeTable
       :table_header="productHeader"
       :table_data="control_Product.product_list"
-      table_scroll="60vh"
+      table_scroll="70vh"
     >
       <template #cell(category)="data">
         <span>{{ data.value }}</span>
@@ -29,7 +29,7 @@
           <button class="btn btn-outline-primary btn-sm" @click="addProduct(false, data.item)">
             <i class="bx bxs-pencil"></i>
           </button>
-          <button class="btn btn-outline-danger btn-sm">
+          <button class="btn btn-outline-danger btn-sm" @click="control_Product.delProduct(data.item.id)">
             <i class="bx bxs-trash"></i>
           </button>
         </div>
