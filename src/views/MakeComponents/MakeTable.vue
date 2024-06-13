@@ -50,7 +50,7 @@
 </template>
 
 <script setup>
-import { computed, toRaw, ref } from 'vue'
+import { computed, toRaw, ref, watch } from 'vue'
 
 const props = defineProps({
   table_header: {
@@ -95,19 +95,25 @@ const getDominator = (anyway) => {
 //表格排序功能
 const headKey = ref(null)
 const valSort = ref(null)
+const table = ref()
+const allPage = ref()
+const dataLimit = ref(props.table_page)
+watch(
+  () => props.table_data,
+  (newTableData) => {
+    table.value = toRaw(newTableData)
+    allPage.value = Math.ceil(table.value.length / dataLimit.value)
+    // console.log('Data loaded:', table.value.length)
+  },
+  { immediate: true }, // 立即执行一次，以确保初始数据被捕获
+)
 
 const getTable = computed(() => {
-  const table = ref(toRaw(props.table_data))
+  // console.log('Table length:', table.value.length)
   if (valSort.value === 'rise') {
-    const sortRiseTable = table.value.sort((a, b) => {
-      return a[headKey.value] > b[headKey.value] ? 1 : -1
-    })
-    return sortRiseTable
+    return [...table.value].sort((a, b) => (a[headKey.value] > b[headKey.value] ? 1 : -1))
   } else if (valSort.value === 'down') {
-    const sortDownTable = table.value.sort((a, b) => {
-      return a[headKey.value] < b[headKey.value] ? 1 : -1
-    })
-    return sortDownTable
+    return [...table.value].sort((a, b) => (a[headKey.value] < b[headKey.value] ? 1 : -1))
   } else {
     return table.value
   }
@@ -125,8 +131,6 @@ const sort = (val, key) => {
 
 //表格分頁功能
 const currentPage = ref(1)
-const dataLimit = ref(props.table_page)
-const allPage = ref(Math.ceil(getTable.value.length / dataLimit.value))
 const initNumber = ref(0)
 
 const nextPage = () => {
