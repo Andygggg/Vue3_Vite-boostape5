@@ -26,6 +26,25 @@ const router = createRouter({
           path: 'ProductList',
           name: 'ProductList',
           component: () => import('../content/HexSchoolFinal/ProductList.vue'),
+          meta: {
+            title: '產品',
+          },
+        },
+        {
+          path: 'OrderList',
+          name: 'OrderList',
+          component: () => import('../content/HexSchoolFinal/OrderList.vue'),
+          meta: {
+            title: '訂單',
+          },
+        },
+        {
+          path: 'DiscountList',
+          name: 'DiscountList',
+          component: () => import('../content/HexSchoolFinal/DiscountList.vue'),
+          meta: {
+            title: '優惠劵',
+          },
         },
       ],
       redirect: { name: 'ProductList' },

@@ -7,6 +7,8 @@
       :table_header="productHeader"
       :table_data="control_Product.product_list"
       table_scroll="70vh"
+      :table_pagination="true"
+      :table_page="4"
     >
       <template #cell(category)="data">
         <span>{{ data.value }}</span>
@@ -15,10 +17,10 @@
         <span>{{ data.value }}</span>
       </template>
       <template #cell(origin_price)="data">
-        <span>{{ data.value }}</span>
+        <span>{{ filter.currency(data.value) }}</span>
       </template>
       <template #cell(price)="data">
-        <span>{{ data.value }}</span>
+        <span>{{ filter.currency(data.value) }}</span>
       </template>
       <template #cell(is_enabled)="data">
         <span class="text-success" v-if="data.value">啟用</span>
@@ -29,7 +31,10 @@
           <button class="btn btn-outline-primary btn-sm" @click="addProduct(false, data.item)">
             <i class="bx bxs-pencil"></i>
           </button>
-          <button class="btn btn-outline-danger btn-sm" @click="control_Product.delProduct(data.item.id)">
+          <button
+            class="btn btn-outline-danger btn-sm"
+            @click="control_Product.delProduct(data.item.id)"
+          >
             <i class="bx bxs-trash"></i>
           </button>
         </div>
@@ -48,6 +53,10 @@ import MakeButton from '@/views/MakeComponents/MakeButton.vue'
 import MakeModal from '@/views//MakeComponents/MakeModal.vue'
 import MakeTable from '@/views/MakeComponents/MakeTable.vue'
 import ProductModal from './ProductModal.vue'
+import { useFilter } from '@/stores/filter.js'
+
+// //轉換格式
+const filter = useFilter()
 
 //獲取產品資訊
 const control_Product = controlProduct()
