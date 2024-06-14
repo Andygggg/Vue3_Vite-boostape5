@@ -8,7 +8,7 @@
       :table_data="control_Product.product_list"
       table_scroll="70vh"
       :table_pagination="true"
-      :table_page="4"
+      :table_page="8"
     >
       <template #cell(category)="data">
         <span>{{ data.value }}</span>
