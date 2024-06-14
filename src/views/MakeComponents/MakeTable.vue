@@ -34,7 +34,7 @@
         </tbody>
       </table>
     </div>
-    <div class="GUI_box" v-show="props.table_pagination">
+    <div class="GUI_box" v-show="props.table_pagination && props.table_data.length > 0">
       <span @click="prevPage"><i class="bx bxs-chevrons-left"></i></span>
       <div
         v-for="num in limitPage"
@@ -164,26 +164,30 @@ const tablePage = computed(() => {
 })
 
 const limitPage = computed(() => {
-  let limit_pages = []
-  const limit_number = 4
-  let start = currentPage.value - limit_number / 2
-  let end = currentPage.value + limit_number / 2
+  if (allPage.value === 0) {
+    return 1
+  } else {
+    let limit_pages = []
+    const limit_number = 4
+    let start = currentPage.value - limit_number / 2
+    let end = currentPage.value + limit_number / 2
 
-  if (allPage.value <= 1 + limit_number) {
-    start = 1
-    end = allPage.value
-  } else if (currentPage.value >= allPage.value - limit_number) {
-    start = allPage.value - limit_number
-    end = allPage.value
-  } else if (start < 1 + limit_number) {
-    start = 1
-    end = 1 + limit_number
-  }
+    if (allPage.value <= 1 + limit_number) {
+      start = 1
+      end = allPage.value
+    } else if (currentPage.value >= allPage.value - limit_number) {
+      start = allPage.value - limit_number
+      end = allPage.value
+    } else if (start < 1 + limit_number) {
+      start = 1
+      end = 1 + limit_number
+    }
 
-  for (let index = start; index <= end; index++) {
-    limit_pages.push(index)
+    for (let index = start; index <= end; index++) {
+      limit_pages.push(index)
+    }
+    return limit_pages
   }
-  return limit_pages
 })
 </script>
 
